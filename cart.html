@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Shop NOW! :: Cart!</title>
+        <link rel="stylesheet" href="main.css">
+        <script>
+        var cartItems = new Array(); // Items in the shopping cart.
+        var cartString = "";
+        var totalItems = 0;
+        var productNames = ["Narwhal T-Shirt", "CSS Awesome T-Shirt", "I don't have birthdays",
+        "Sorry I'm late T-Shirt", "Wow T-Shirt", "R2D2 T-Shirt"];
+        var productPrices = [19.95, 9.95, 19.95, 19.95, 24.95, 29.95];
+        var productImages = ["images/narwhal.webp", "images/css-awesome.webp", "images/birthdays.webp", "images/sorry.webp", "images/wow.webp", "images/r2d2.webp"]
+
+            function startUp() {
+                // Load the cart into memory.
+                cartString = sessionStorage.cartString;
+                if(typeof cartString !="undefined" && cartString != "") {
+                    cartItems = cartString.split("~");
+                }
+                totalItems = cartItems.length;
+
+                // Create the contents of the web page.
+                var output = "<header><h1>Shop Now! Cart!</h1></header>";
+                var output = output + "<nav><a href='index.html'>Shop!</a></nav>";
+                output = output + "<div id='wrapper'>";
+
+                var total = 0;
+                // Write a div for each product in cart.
+                if(totalItems) {
+                    for(var i = 0; i < totalItems; i++) {
+                        output = output + "<div class='productList'>";
+                        output = output + "<h3>"+productNames[cartItems[i]]+"</h3>";
+                        output = output + "<img width='100' src='"+productImages[cartItems[i]]+"'>";
+                        output = output + "<div class='money'>"+productPrices[cartItems[i]]+"</div>";
+                        output = output + "<input type='button' value='Delete' onclick='deleteFromCart("+i+");'>";
+                        output = output + "</div>";
+                        total += parseFloat(productPrices[cartItems[i]]);
+                    }
+                    output = output + "<div id='total'>Total: $"+total.toFixed(2)+"</div>";
+                    output = output + "<input type='button' value='Go to check out' onclick='window.location=\"checkout.html\"'>";
+                } else {
+                    output = output + "<h3>No items in cart! Shop Now!</h3>";
+                }
+
+                output = output + "</div>";
+
+                // Set the contents of the web page.
+                document.body.innerHTML = output;
+            }
+
+            function deleteFromCart(x) {
+                for(var i = x; i < totalItems; i++) {
+                    cartItems[i] = cartItems[i+1];
+                }
+                totalItems--;
+                cartString = "";
+                if(totalItems) {
+                    for(var i = 0; i < totalItems; i++) {
+                        if(cartString != "") {
+                            cartString = cartString + "~";
+                        }
+                        cartString = cartString + cartItems[i];
+                    }
+                } else {
+                    // Make sure to clear the array if there are no items.
+                    // If you leave the empty array, it will end up with an
+                    // undefined item in the shopping car. Try it by commenting
+                    // out the following line.
+                    cartItems = "";
+                }
+                sessionStorage.cartString = cartString;
+                startUp();
+            }
+        </script>
+    </head>
+
+    <body onload="startUp();">
+
+    </body>
+</html>

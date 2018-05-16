@@ -1,0 +1,64 @@
+header {
+    text-align: center;
+}
+
+nav {
+    position: fixed;
+    z-index: 1;
+    overflow-x: hidden;
+    top: 5em;
+    right: 25px;
+    width: 50px;
+    height: 50px;
+}
+
+nav.cart {
+    background-image: url(images/cart.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+
+}
+
+#cart {
+    font-weight: bold;
+    position: absolute;
+    left: 25px;
+    top: 5px;
+}
+
+#wrapper {
+    margin-right: 75px;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    margin-left: 5em;
+    border: 2px solid #cfc;
+}
+
+.product {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1em;
+}
+
+.productList {
+    width: 15em;
+    display: inline-block;
+    padding: 1em;
+    border: 2px solid #cfc;
+}
+
+.money:before {
+    content: "$";
+}
+
+#total {
+    width: 15em;
+    display: block;
+    padding: 1em;
+    border: 2px solid #ccf;
+}
+
+input {
+    display: block;
+}

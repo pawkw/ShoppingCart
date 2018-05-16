@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Shop NOW!</title>
+        <link rel="stylesheet" href="main.css">
+        <script>
+        var cartItems = new Array(); // Items in the shopping cart.
+        var cartString = "";
+        var totalItems = 0;
+        var productNames = ["Narwhal T-Shirt", "CSS Awesome T-Shirt", "I don't have birthdays",
+        "Sorry I'm late T-Shirt", "Wow T-Shirt", "R2D2 T-Shirt"];
+
+            function startUp() {
+                cartString = sessionStorage.cartString;
+                if(typeof cartString !="undefined" && cartString != "") {
+                    cartItems = cartString.split("~");
+                }
+                totalItems = cartItems.length;
+                document.getElementById("items").innerHTML = totalItems;
+            }
+
+            function addToCart(x) {
+                cartItems[totalItems] = x;
+                if(totalItems) {
+                    cartString = cartString + "~";
+                }
+                totalItems++;
+                cartString = cartString+x;
+                sessionStorage.cartString = cartString;
+                document.getElementById("items").innerHTML = totalItems;
+            }
+        </script>
+    </head>
+    <header>
+        <h1>Shop NOW!</h1>
+    </header>
+    <nav class="cart">
+            <span id="cart"><a href="cart.html" id="items">0</a></span>
+    </nav>
+    <body onload="startUp();">
+
+    <div id="wrapper">
+        <div class="product">
+            <h3>Narwhal</h3>
+            <img src="images/narwhal.webp" alt="Stormtrooper riding narwhal" width="300">
+            <div class="money">19.95</div>
+            <input type="button" value="Add to cart" onclick="addToCart(0);">
+        </div>
+
+        <div class="product">
+            <h3>CSS Awesome</h3>
+            <img src="images/css-awesome.webp" alt="CSS is awesome" width="300">
+            <div class="money">9.95</div>
+            <input type="button" value="Add to cart" onclick="addToCart(1);">
+        </div>
+
+        <div class="product">
+            <h3>I don't have birthdays...</h3>
+            <img src="images/birthdays.webp" alt="I don't have birthdays, I level up" width="300">
+            <div class="money">19.95</div>
+            <input type="button" value="Add to cart" onclick="addToCart(2);">
+        </div>
+
+        <div class="product">
+            <h3>Sorry</h3>
+            <img src="images/sorry.webp" alt="Sorry I'm late, I didn't want to come" width="300">
+            <div class="money">19.95</div>
+            <input type="button" value="Add to cart" onclick="addToCart(3);">
+        </div>
+
+        <div class="product">
+            <h3>Wow</h3>
+            <img src="images/wow.webp" alt="Wow - Owen Wilson" width="300">
+            <div class="money">24.95</div>
+            <input type="button" value="Add to cart" onclick="addToCart(4);">
+        </div>
+
+        <div class="product">
+            <h3>R2D2</h3>
+            <img src="images/r2d2.webp" alt="R2D2 - I loved him in Star Trek" width="300">
+            <div class="money">29.95</div>
+            <input type="button" value="Add to cart" onclick="addToCart(5);">
+        </div>
+
+    </div>
+    </body>
+    <footer>&copy;2018 Nobody</footer>
+</html>
