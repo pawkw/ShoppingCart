@@ -62,3 +62,27 @@ nav.cart {
 input {
     display: block;
 }
+
+.summaryList {
+
+}
+
+.summaryItem {
+    border: 1px solid #cfc;
+    width: 20em;
+    padding: 1em;
+}
+
+.summaryItem .money {
+    float: right;
+}
+
+footer {
+    text-align: center;
+    margin: 2em;
+}
+
+form {
+    padding: 1em;
+    border: 1px solid #cfc;
+}

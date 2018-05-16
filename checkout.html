@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Shop NOW! :: Check out</title>
+        <link rel="stylesheet" href="main.css">
+        <script>
+        var cartItems = new Array(); // Items in the shopping cart.
+        var cartString = "";
+        var totalItems = 0;
+        var productNames = ["Narwhal T-Shirt", "CSS Awesome T-Shirt", "I don't have birthdays",
+        "Sorry I'm late T-Shirt", "Wow T-Shirt", "R2D2 T-Shirt"];
+        var productPrices = [19.95, 9.95, 19.95, 19.95, 24.95, 29.95];
+        var productImages = ["images/narwhal.webp", "images/css-awesome.webp", "images/birthdays.webp", "images/sorry.webp", "images/wow.webp", "images/r2d2.webp"];
+
+        function startUp() {
+            // Load the cart into memory.
+            cartString = sessionStorage.cartString;
+            if(typeof cartString !="undefined" && cartString != "") {
+                cartItems = cartString.split("~");
+            }
+            totalItems = cartItems.length;
+
+            // Get a pointer to the summary list.
+            var element = document.getElementById('summaryList');
+            var total = 0;
+            var output = "";
+            // Write a div for each product in cart.
+            if(totalItems) {
+                for(var i = 0; i < totalItems; i++) {
+                    output = output + "<div class='summaryItem'>";
+                    output = output + "<span>"+productNames[cartItems[i]]+"</span>";
+                    output = output + "<span class='money'>"+productPrices[cartItems[i]]+"</span>";
+                    output = output + "</div>";
+                    total += parseFloat(productPrices[cartItems[i]]);
+                    console.log("Item: "+i);
+                }
+                output = output + "<div id='total'>Total: $"+total.toFixed(2)+"</div>";
+            } else {
+                output = output + "<h3>No items in cart! Shop Now!</h3>";
+            }
+            element.innerHTML = output;
+        }
+        </script>
+    </head>
+    <header>
+        <h1>Shop NOW! Check out!</h1>
+    </header>
+    <nav>
+        <a href="index.html">Shop</a>
+    </nav>
+    <body onload="startUp();">
+        <div class="wrapper">
+            <div id="summaryList">
+            </div>
+            <form class="address" action="pay.html" method="post">
+                <label for="username">Name:</label>
+                <input type="text" name="username">
+                <label for="address1">Address 1:</label>
+                <input type="text" name="address1">
+                <label for="address2">Address 2:</label>
+                <input type="text" name="address2">
+                <label for="city">City:</label>
+                <input type="text" name="city">
+                <label for="postal">Postal:</label>
+                <input type="text" name="postal">
+                <label for="phone">Phone:</label>
+                <input type="text" name="phone">
+                <input type="submit" value="Pay">
+            </form>
+        </div>
+    </body>
+    <footer>&copy;2018 Nobody</footer>
+</html>
