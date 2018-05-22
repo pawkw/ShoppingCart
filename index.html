@@ -21,13 +21,21 @@
             }
 
             function addToCart(x) {
+                // This does not end up being used. It could be used to
+                // reconstruct the cart contents from scratch if needed.
                 cartItems[totalItems] = x;
-                if(totalItems) {
-                    cartString = cartString + "~";
+
+                // If there are items already, add the separator ~ and then the
+                // item number to the string.
+                if(totalItems != 0) {
+                    cartString = cartString + "~"+x;
+                } else { // There is nothing in the cart, so add the item
+                         // alone without the separator.
+                    cartString = x;
                 }
                 totalItems++;
-                cartString = cartString+x;
                 sessionStorage.cartString = cartString;
+                // Put the number of items over the picture of the cart.
                 document.getElementById("items").innerHTML = totalItems;
             }
         </script>
